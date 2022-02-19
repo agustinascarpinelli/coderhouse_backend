@@ -1,1 +1,1 @@
-console.log("aca va a ir el desafio nro 2");
+console.log("aca va a ir el desafio numero 2");
