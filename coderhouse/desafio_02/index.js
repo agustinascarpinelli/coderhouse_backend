@@ -35,13 +35,18 @@ return archivo;
 
 
 async getById(number){
-        return await fs.promises.readFile(this.archivo,'UTF-8')
-	.then(archivo=>{
-		JSON.parse(archivo)
-		if(archivo!=null){ 
-                    archivo=>archivo.filter(producto=>producto.id==number)} 
-	else{console.log("no existe el producto con ese indice") }})
-        .catch(err=>console.log("err"))
+        try {
+	const contenido= await fs.promises.readFile(this.archivo,'UTF-8')
+        const prod=JSON.parse(contenido);
+        	if(prod !=null){ 
+		const obj=prod.find(obj=>obj.id==number);
+		return obj;
+} 
+	else{console.log("no existe el producto con ese indice")
+	return null;
+	}
+        }catch(err){
+		console.log("err")}
 }
 
 
@@ -55,9 +60,13 @@ async getById(number){
 
 
 async getAll(){
-	return await fs.promises.readFile(this.archivo,'UTF-8')
-	.then(archivo=>JSON.parse(archivo))
-        .catch(err=>console.log(err))
+	try{
+	const contenido=await fs.promises.readFile(this.archivo,'UTF-8')
+	const prod=JSON.parse(contenido);
+	return prod;
+        }catch(err){
+	console.log(err);
+	return null; }
 
  }
 
@@ -65,8 +74,9 @@ async getAll(){
 
 async deleteById(number){
 
- let productos =await fs.promises.readFile(this.archivo,'UTF-8',(err,contenido)=>
-	   {
+          
+	const productos=await fs.promises.readFile(this.archivo,'UTF-8',(err,contenido)=> {
+
             if (err){
 	    console.log("no hay productos para borrar")
 	    }
@@ -79,8 +89,8 @@ async deleteById(number){
 		}
 		else{
                 const indice= productos.indexOf(producto);
-		productos.splice(i,1);
-		this.agregarProducto(productos);
+		productos.slice(indice,1);
+		
 		console.log("Producto eliminado");
 		}      
 	      }
@@ -92,7 +102,6 @@ async deleteById(number){
  }
 
 deleteAll(){
-const fs=require('fs')
 fs.unlink(this.archivo,err=>{
  if(err){
  console.log("No se pudieron eliminar todos los productos")
@@ -112,6 +121,7 @@ const auto={
 	price:20000,
         thumbnail:"url1"
 }
+
 await autos.save(auto);
 const auto2={
         title:"Mercedes Benz",
@@ -124,10 +134,13 @@ const auto3={
         price:30000,
         thumbnail:"url3"
 }
-
 await autos.save(auto3);
-const producto=await autos.getById(3);
+
+
+
+const producto=await autos.getById(2);
 console.log(`EL producto encontrado es: ${JSON.stringify(producto)}`)
+await autos.deleteById(3);
 const productos=await autos.getAll();
 console.log(`EL conjunto de productos es: ${JSON.stringify(productos)}`)
 }
