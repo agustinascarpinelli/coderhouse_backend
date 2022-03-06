@@ -40,35 +40,10 @@ return this.id;
 		 return prod;
 }
 catch(err){
-          console.log("Erro al leer el archivo")
+          console.log("Error al leer el archivo")
 		 return null;}
 
  }
 }
 
-
-async function test(){        
-  const cars=new Container ('cars.json');
-	const car1={                       
-           title:'tesla',
-	   price:2000,
-	   thumbnail:'url1'
-}
-await cars.save(car1);
-const car2={
-           title:'audi',
-           price:3000,
-           thumbnail:'url2'
-}
-await cars.save(car2);
-const car3={
-           title:'mercedes benz',
-           price:5000,
-           thumbnail:'url3'
-}
-await cars.save(car3);
-const products= await cars.getAll();
-console.log(`El conjunto de productos es:${JSON.stringify(products)}`)
-}
-test();
 module.exports=Container;
