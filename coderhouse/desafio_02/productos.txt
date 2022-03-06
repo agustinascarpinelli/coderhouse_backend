@@ -1,1 +1,0 @@
-[{"title":"tesla","price":1000,"thumbnail":"src1","id":1},{"title":"mercedes benz","price":2000,"thumbnail":"src2","id":2},{"title":"audi","price":3000,"thumnail":"src3","id":3}]
