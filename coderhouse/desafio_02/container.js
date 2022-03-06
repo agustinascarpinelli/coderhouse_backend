@@ -42,8 +42,39 @@ return this.id;
 catch(err){
           console.log("Error al leer el archivo")
 		 return null;}
-
- }
 }
+
+async getById(id){
+	return await fs.promises.readFile(this.filename,'UTF-8')
+	.then(file=>JSON.parse(file))
+	.then(file=>file.filter(obj=>obj.id===id))
+        .catch(err=>
+          console.log("Error al leer el archivo"))
+
+          }
+
+async deletebyId(idd){
+        await fs.promises.readFile(this.filename,'UTF-8')
+        .then(file=>JSON.parse(file))
+	.then(file=>file.filter(obj=>obj.id != idd))
+	.then(async file=>{
+                await fs.promises.writeFile(this.filename,JSON.stringify(file))	    
+	})
+.catch(err=>
+          console.log("Error al eliminar el producto del archivo"))
+
+}
+
+async deleteAll(){
+        try{
+            await fs.promises.unlink(this.filename)
+	   console.log("productos borrados del archivo")   
+	}catch(err){
+	console.log("Error al borrar productos del archivo")
+}
+}
+
+}
+
 
 module.exports=Container;

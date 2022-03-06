@@ -21,5 +21,8 @@ const car3={
 await cars.save(car3);
 const products= await cars.getAll();
 console.log(`El conjunto de productos es:${JSON.stringify(products)}`)
+const byId=await cars.getById(6)
+console.log(`${JSON.stringify(byId)}`);
+await cars.deletebyId(4);
 }
 test();
