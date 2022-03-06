@@ -16,7 +16,7 @@ app.get('/',(req,res)=>{
 
 app.get('/products', async(req,res)=>{
 	
-	const prods=await Container.getAll();
+	const prods=await container.getAll();
 	let html = `<h1 style="background-color:blue;">Autos disponibles</h1>`;
 	html+=`<ul>`;
 	html+=`<li>Nombre</li>`;
@@ -36,7 +36,7 @@ app.get('/products', async(req,res)=>{
 app.get('/randomProducts',async(req,res)=>{
              const prods=await container.getAll();
              const id=getRandom(1,prods.length)
-	     const prod=prods[i]
+	     const prod=prods[id]
              let html = `<h1 style="background-color:blue;">Auto al azar</h1>`;
              html+=`<ul>`;
              html+=`<li>"${prod.title}"</li>`;

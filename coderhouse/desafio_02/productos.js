@@ -71,4 +71,4 @@ const products= await cars.getAll();
 console.log(`El conjunto de productos es:${JSON.stringify(products)}`)
 }
 test();
-
+module.exports=Container;
